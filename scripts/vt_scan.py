@@ -41,9 +41,7 @@ if __name__ == "__main__":
     input_file_globs = args.files
     input_files = []
     for ifg in input_file_globs:
-        for input_file in glob.glob(ifg):
-            input_files.append(input_file)
-
+        input_files.extend(iter(glob.glob(ifg)))
     print(f"files to scan: {input_files}")
 
     api_key = os.getenv("VT_API_KEY")
@@ -56,14 +54,13 @@ if __name__ == "__main__":
             results.append(scan_file(client, input_file, progress))
             progress.update(file_task, advance=1)
 
-    # generate markdown
-    md_path = args.md_output
-    if md_path:
+    if md_path := args.md_output:
         print(f"writing markdown to {md_path}")
         smd = ["## 🛡️ VirusTotal Analysis", "" ]
-        for result in results:
-            smd.append(f"\n - [{result.file_name}]({result.web_url})")
-
+        smd.extend(
+            f"\n - [{result.file_name}]({result.web_url})"
+            for result in results
+        )
         with open(md_path, "w", encoding="utf-8") as f:
             f.writelines(smd)
 
