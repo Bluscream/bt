@@ -32,7 +32,6 @@ file(GLOB core_src
     "../grey/grey/common/clipboard.cpp"
     "../grey/grey/common/keyboard.cpp"
     "../grey/grey/common/datetime.cpp"
-    "../grey/grey/common/desktop_shell.cpp"
     "../grey/grey/common/process.cpp")
 
 if(WIN32)
@@ -58,7 +57,7 @@ if(APPLE)
     set_target_properties(${APP_NAME} PROPERTIES
             MACOSX_BUNDLE TRUE
             MACOSX_BUNDLE_BUNDLE_NAME "${APP_LONG_NAME}"
-            MACOSX_BUNDLE_GUI_IDENTIFIER "uk.aloneguid.browsertamer"
+            MACOSX_BUNDLE_GUI_IDENTIFIER "uk.co.aloneguid.browsertamer"
             MACOSX_BUNDLE_INFO_STRING "${APP_LONG_NAME}"
             MACOSX_BUNDLE_ICON_FILE "BrowserTamer.icns"
             MACOSX_BUNDLE_BUNDLE_VERSION "${PROJECT_VERSION}"
